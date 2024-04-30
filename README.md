@@ -1,0 +1,2 @@
+# vue3-ts-myproject
+这是一个使用Vue3+Typescript+pinia+ElementPlus开发的练手项目，将本人工作以及学习中用到的数据大屏、前端性能优化实现方案等代码优化整合在一起，构建一个规范的Vue3项目
