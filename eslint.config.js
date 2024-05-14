@@ -4,14 +4,19 @@ import tseslint from "typescript-eslint";
 import pluginVue from "eslint-plugin-vue";
 import vueESlintParser from "vue-eslint-parser";
 import eslintPluginPrettier from "eslint-plugin-prettier";
+import autoImport from "./utils/auto-import.cjs";
 
 export default [
   {
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...autoImport.globals,
+      },
     },
   },
   pluginJs.configs.recommended,
+  ...pluginVue.configs["flat/essential"],
   {
     languageOptions: {
       parser: vueESlintParser,
@@ -72,5 +77,4 @@ export default [
       // ],
     },
   },
-  ...pluginVue.configs["flat/essential"],
 ];
