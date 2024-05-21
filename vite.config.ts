@@ -67,7 +67,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
             enabledCollections: ["ep"], // element-plus图标库，其他图标库 https://icon-sets.iconify.design/
           }),
         ],
-        dts: path.resolve(pathSrc, "types", "components.d.ts"), //  自动导入组件类型声明文件位置，默认根目录
+        dts: path.resolve(pathSrc, "typings", "components.d.ts"), //  自动导入组件类型声明文件位置，默认根目录
       }),
       Icons({
         autoInstall: true,

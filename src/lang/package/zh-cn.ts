@@ -21,6 +21,7 @@ export default {
       },
       captchaCode: {
         required: "请输入验证码",
+        error: "验证码错误，请重新输入",
       },
     },
   },

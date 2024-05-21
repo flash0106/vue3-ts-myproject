@@ -21,6 +21,7 @@ export default {
       },
       captchaCode: {
         required: "Please enter Verify Code",
+        error: "Wrong Captcha,please enter again",
       },
     },
   },
