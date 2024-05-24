@@ -42,12 +42,18 @@
     }
   },
   "dependencies": {
+    "-": "^0.0.1",
     "@element-plus/icons-vue": "^2.3.1",
     "@vueuse/core": "^10.9.0",
+    "D": "^1.0.0",
     "axios": "^1.6.8",
     "echarts": "^5.5.0",
     "element-plus": "^2.7.2",
+    "nprogress": "^0.2.0",
+    "path-browserify": "^1.0.1",
+    "path-to-regexp": "^6.2.2",
     "pinia": "^2.1.7",
+    "vite-plugin-vue-devtools": "^7.2.1",
     "vue": "^3.4.21",
     "vue-i18n": "^9.13.1",
     "vue-router": "^4.3.2"
@@ -58,6 +64,8 @@
     "@eslint/js": "^9.1.1",
     "@iconify-json/ep": "^1.1.15",
     "@types/node": "^20.12.7",
+    "@types/nprogress": "^0.2.3",
+    "@types/path-browserify": "^1.0.2",
     "@vitejs/plugin-vue": "^5.0.4",
     "commitizen": "^4.3.0",
     "cz-git": "^1.9.1",

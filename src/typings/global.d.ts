@@ -1,23 +1,35 @@
 declare global {
   /**
+   * 响应数据
+   */
+  interface ResponseData<T = any> {
+    code: string;
+    data: T;
+    msg: string;
+  }
+
+  /**
    * 分页查询参数
    */
   interface PageQuery {
-    pageNo: number;
+    pageNum: number;
     pageSize: number;
   }
+
   /**
    * 分页响应对象
    */
   interface PageResult<T> {
-    total: number;
+    /** 数据列表 */
     list: T;
+    /** 总数 */
+    total: number;
   }
 
   /**
    * 页签对象
    */
-  interface TagView {
+  export interface TagView {
     /** 页签名称 */
     name: string;
     /** 页签标题 */
@@ -62,7 +74,22 @@ declare global {
     size: string;
     /** 语言( zh-cn| en) */
     language: string;
+    /** 是否开启水印 */
+    watermarkEnabled: boolean;
+    /** 水印内容 */
+    watermarkContent: string;
+  }
+
+  /**
+   * 组件数据源
+   */
+  interface OptionType {
+    /** 值 */
+    value: string | number;
+    /** 文本 */
+    label: string;
+    /** 子列表  */
+    children?: OptionType[];
   }
 }
-
-export {};
+export { TagView };

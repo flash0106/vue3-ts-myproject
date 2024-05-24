@@ -1,7 +1,8 @@
 import axios, { InternalAxiosRequestConfig, AxiosResponse } from "axios";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { useUserStoreHook } from "../store/modules/user";
-const instance = axios.create({
+import { ResultEnum } from "@/enums/ResultEnum";
+const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 60000,
   //参数序列化
@@ -9,7 +10,7 @@ const instance = axios.create({
 });
 
 // 请求拦截器
-instance.interceptors.request.use(
+request.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
@@ -23,17 +24,21 @@ instance.interceptors.request.use(
 );
 
 // 响应拦截器
-instance.interceptors.response.use(
-  (responce: AxiosResponse) => {
-    const { code, msg } = responce.data;
-    //登录成功
-    if (code === "00000") {
-      return responce.data;
+request.interceptors.response.use(
+  (response: AxiosResponse) => {
+    // 检查配置的响应类型是否为二进制类型（'blob' 或 'arraybuffer'）, 如果是，直接返回响应对象
+    if (
+      response.config.responseType === "blob" ||
+      response.config.responseType === "arraybuffer"
+    ) {
+      return response;
     }
-    // 处理响应数据为二进制流的情况（Excel导出）
-    if (responce.data instanceof ArrayBuffer) {
-      return responce;
+
+    const { code, data, msg } = response.data;
+    if (code === ResultEnum.SUCCESS) {
+      return data;
     }
+
     ElMessage.error(msg || "系统出错");
     return Promise.reject(new Error(msg || "Error"));
   },
@@ -60,4 +65,4 @@ instance.interceptors.response.use(
   }
 );
 
-export default instance as request;
+export default request;

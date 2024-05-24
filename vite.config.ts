@@ -9,6 +9,9 @@ import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import UnoCSS from "unocss/vite";
+
+// https://devtools-next.vuejs.org/
+import VueDevTools from "vite-plugin-vue-devtools";
 // https://vitejs.dev/config/
 import {
   name,
@@ -55,7 +58,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         // 是否在 vue 模板中自动导入
         vueTemplate: true,
         // 指定自动导入函数TS类型声明文件路径 (false:关闭自动生成) 使用一次自动导入后即可关闭，避免重复引入
-        //dts: false,
+        //dts: true,
         dts: "src/typings/auto-imports.d.ts",
       }),
       Components({
@@ -67,6 +70,8 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
             enabledCollections: ["ep"], // element-plus图标库，其他图标库 https://icon-sets.iconify.design/
           }),
         ],
+        // 指定自定义组件位置(默认:src/components)
+        dirs: ["src/components", "src/**/components", "src/**/**/components"],
         dts: path.resolve(pathSrc, "typings", "components.d.ts"), //  自动导入组件类型声明文件位置，默认根目录
       }),
       Icons({
@@ -77,6 +82,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         iconDirs: [resolve(pathSrc, "assets/icons")],
         // 指定symbolId格式
         symbolId: "icon-[dir]-[name]",
+      }),
+      VueDevTools({
+        openInEditorHost: `http://localhost:${env.VITE_APP_PORT}`,
       }),
     ],
     resolve: {

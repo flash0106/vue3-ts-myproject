@@ -10,11 +10,8 @@
         :inactive-icon="Sunny"
         @change="toggleTheme"
       />
-      <!-- <lang-select class="ml-2 cursor-pointer" /> -->
+      <lang-select class="ml-2 cursor-pointer" />
     </div>
-    <!-- <div class="login-container__card">
-      
-    </div> -->
     <el-card class="!border-none !bg-transparent !rounded-4% w-100 <sm:w-85">
       <div class="text-center relative">
         <h2>{{ defaultSettings.title }}</h2>
@@ -100,15 +97,14 @@
 <script setup lang="ts">
 import { Sunny, Moon } from "@element-plus/icons-vue";
 import { LoginData } from "@/service/auth/types";
-import { getCaptchaApi } from "@/service/auth";
+import AuthAPI from "@/service/auth";
 import defaultSettings from "@/settings";
 import { useUserStore, useSettingsStore } from "@/store";
 import { LocationQuery, LocationQueryValue } from "vue-router";
 import { ThemeEnum } from "@/enums/ThemeEnum";
-
+import router from "@/router";
 const { t } = useI18n();
 const route = useRoute();
-const router = useRouter();
 
 const userStore = useUserStore();
 const settingsStore = useSettingsStore();
@@ -168,7 +164,7 @@ const loginRules = computed(() => {
  * 获取验证码
  */
 function getCaptcha() {
-  getCaptchaApi().then(({ data }) => {
+  AuthAPI.getCaptcha().then((data) => {
     loginData.value.captchaKey = data.captchaKey;
     captchaBase64.value = data.captchaBase64;
   });

@@ -1,10 +1,12 @@
-import { ref } from "vue";
-import { store } from "@/store";
-import { UserInfo } from "@/service/user/types";
-import { LoginData } from "@/service/auth/types";
-import { loginApi, logoutApi } from "@/service/auth";
-import { getUserInfoApi } from "@/service/user";
+import AuthAPI from "@/service/auth/index";
+import UserAPI from "@/service/user";
 import { resetRouter } from "@/router";
+import { store } from "@/store";
+
+import { LoginData } from "@/service/auth/types";
+import { UserInfo } from "@/service/user/types";
+import { TOKEN_KEY } from "@/enums/CacheEnum";
+
 export const useUserStore = defineStore("user", () => {
   const user = ref<UserInfo>({
     roles: [],
@@ -19,26 +21,23 @@ export const useUserStore = defineStore("user", () => {
    */
   function login(loginData: LoginData) {
     return new Promise<void>((resolve, reject) => {
-      loginApi(loginData)
-        .then((res) => {
-          const { tokenType, accessToken } = res.data;
-          localStorage.setItem("accessToken", tokenType + " " + accessToken);
+      AuthAPI.login(loginData)
+        .then((data) => {
+          const { tokenType, accessToken } = data;
+          localStorage.setItem(TOKEN_KEY, tokenType + " " + accessToken); // Bearer eyJhbGciOiJIUzI1NiJ9.xxx.xxx
           resolve();
         })
-        .catch((err) => {
-          reject(err);
+        .catch((error) => {
+          reject(error);
         });
     });
   }
 
-  /**
-   * 获取信息(用户昵称、头像、角色集合、权限集合)
-   */
+  // 获取信息(用户昵称、头像、角色集合、权限集合)
   function getUserInfo() {
     return new Promise<UserInfo>((resolve, reject) => {
-      getUserInfoApi()
-        .then((res) => {
-          const { data } = res;
+      UserAPI.getInfo()
+        .then((data) => {
           if (!data) {
             reject("Verification failed, please Login again.");
             return;
@@ -50,36 +49,32 @@ export const useUserStore = defineStore("user", () => {
           Object.assign(user.value, { ...data });
           resolve(data);
         })
-        .catch((err) => {
-          reject(err);
+        .catch((error) => {
+          reject(error);
         });
     });
   }
 
-  /**
-   * 退出登录
-   */
+  // user logout
   function logout() {
     return new Promise<void>((resolve, reject) => {
-      logoutApi()
+      AuthAPI.logout()
         .then(() => {
-          localStorage.setItem("accessToken", "");
+          localStorage.setItem(TOKEN_KEY, "");
           location.reload(); // 清空路由
           resolve();
         })
-        .catch((err) => {
-          reject(err);
+        .catch((error) => {
+          reject(error);
         });
     });
   }
 
-  /**
-   * 重置token
-   */
+  // remove token
   function resetToken() {
     console.log("resetToken");
     return new Promise<void>((resolve) => {
-      localStorage.setItem("accessToken", "");
+      localStorage.setItem(TOKEN_KEY, "");
       resetRouter();
       resolve();
     });
@@ -94,6 +89,7 @@ export const useUserStore = defineStore("user", () => {
   };
 });
 
+// 非setup
 export function useUserStoreHook() {
   return useUserStore(store);
 }
