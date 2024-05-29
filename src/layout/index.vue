@@ -38,7 +38,7 @@
         <TagsView v-if="showTagsView" />
       </div>
       <AppMain />
-      <!-- <Settings v-if="defaultSettings.showSettings" /> -->
+      <Settings v-if="defaultSettings.showSettings" />
     </div>
   </div>
 </template>

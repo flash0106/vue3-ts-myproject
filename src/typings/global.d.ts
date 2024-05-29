@@ -74,10 +74,6 @@ declare global {
     size: string;
     /** 语言( zh-cn| en) */
     language: string;
-    /** 是否开启水印 */
-    watermarkEnabled: boolean;
-    /** 水印内容 */
-    watermarkContent: string;
   }
 
   /**
