@@ -60,3 +60,14 @@ export function setupPermission() {
     NProgress.done();
   });
 }
+
+export function hasAuth(
+  value: string | string[],
+  type: "button" | "role" = "button"
+) {
+  const { roles, perms } = useUserStore().user;
+  const auths = type === "button" ? perms : roles;
+  return Array.isArray(value)
+    ? auths.some((perm) => value.includes(perm))
+    : auths.includes(value);
+}

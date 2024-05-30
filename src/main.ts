@@ -6,6 +6,7 @@ import "@/styles/index.scss";
 import "uno.css";
 import { setupStore } from "@/store";
 import { setupI18n, setupElIcons, setupPermission } from "./plugins";
+import { setupDirective } from "./directive";
 import router from "./router";
 import { createApp } from "vue";
 import App from "./App.vue";
@@ -19,6 +20,8 @@ setupI18n(app);
 setupElIcons(app);
 // 权限控制
 setupPermission();
+//注册全局指令
+setupDirective(app);
 
 //挂载路由
 app.use(router);

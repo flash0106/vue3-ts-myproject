@@ -38,6 +38,64 @@ export interface MenuVO {
 }
 
 /**
+ * 菜单表单对象类型
+ */
+export interface MenuForm {
+  /**
+   * 菜单ID
+   */
+  id?: string;
+  /**
+   * 父菜单ID
+   */
+  parentId?: number;
+  /**
+   * 菜单名称
+   */
+  name?: string;
+  /**
+   * 菜单是否可见(1:是;0:否;)
+   */
+  visible: number;
+  icon?: string;
+  /**
+   * 排序
+   */
+  sort: number;
+  /**
+   * 组件路径
+   */
+  component?: string;
+  /**
+   * 路由路径
+   */
+  path?: string;
+  /**
+   * 跳转路由路径
+   */
+  redirect?: string;
+
+  /**
+   * 菜单类型
+   */
+  type: MenuTypeEnum;
+
+  /**
+   * 权限标识
+   */
+  perm?: string;
+  /**
+   * 【菜单】是否开启页面缓存
+   */
+  keepAlive?: number;
+
+  /**
+   * 【目录】只有一个子路由是否始终显示
+   */
+  alwaysShow?: number;
+}
+
+/**
  * RouteVO，路由对象
  */
 export interface RouteVO {
