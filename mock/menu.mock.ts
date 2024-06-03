@@ -161,9 +161,9 @@ export default defineMock([
               },
             },
             {
-              path: "icon-selector",
-              component: "demo/icon-selector",
-              name: "IconSelector",
+              path: "img-lazy-load",
+              component: "demo/img-lazy-load/index",
+              name: "ImgLazyLoadDemo",
               meta: {
                 title: "图片懒加载",
                 icon: "",
@@ -173,9 +173,9 @@ export default defineMock([
               },
             },
             {
-              path: "dict-demo",
-              component: "demo/dict",
-              name: "DictDemo",
+              path: "virtual-scroll",
+              component: "demo/virtual-scroll",
+              name: "VertualScrollDemo",
               meta: {
                 title: "虚拟滚动",
                 icon: "",
@@ -497,7 +497,7 @@ export default defineMock([
         {
           id: 36,
           parentId: 0,
-          name: "组件封装",
+          name: "前端实践",
           type: "CATALOG",
           path: "/component",
           component: "Layout",
@@ -524,7 +524,7 @@ export default defineMock([
             {
               id: 38,
               parentId: 36,
-              name: "图片上传",
+              name: "大文件上传",
               type: "MENU",
               path: "upload",
               component: "demo/upload",
@@ -538,10 +538,10 @@ export default defineMock([
             {
               id: 39,
               parentId: 36,
-              name: "图标选择器",
+              name: "图片懒加载",
               type: "MENU",
-              path: "icon-selector",
-              component: "demo/icon-selector",
+              path: "img-lazy-load",
+              component: "demo/img-lazy-load",
               sort: 3,
               visible: 1,
               icon: "",
