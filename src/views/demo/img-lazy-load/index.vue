@@ -24,7 +24,7 @@
       </el-col>
       <el-col :span="8">
         <el-card>
-          <template #header>方式3（img标签新属性load）</template>
+          <template #header>方式3（img标签新属性loading）</template>
           <div class="container h-2xl overflow-scroll method-3-container">
             <template v-for="(item, index) in imgList" :key="index">
               <img :src="item" alt="" class="w-full" loading="lazy" />
@@ -46,13 +46,13 @@ for (let i = 0; i < 100; i++) {
 const loadCount = ref(0);
 function lazyLoad() {
   const lazyLoadImgList = document.querySelectorAll(".method-1-container img");
-  const lazyLoadContainer = document.querySelector(".method-1-container");
-  const clientHeight = (lazyLoadContainer as HTMLElement).clientHeight;
-  const scrollTop = (lazyLoadContainer as HTMLElement).scrollTop;
+  // const lazyLoadContainer = document.querySelector(".method-1-container");
+  // const clientHeight = (lazyLoadContainer as HTMLElement).clientHeight;
+  // const scrollTop = (lazyLoadContainer as HTMLElement).scrollTop;
 
   for (let i = loadCount.value; i < lazyLoadImgList.length; i++) {
     let element = lazyLoadImgList[i] as HTMLElement;
-    if (element.offsetTop < clientHeight + scrollTop) {
+    if (element.getBoundingClientRect().top < window.innerHeight) {
       element.setAttribute("src", element.getAttribute("data-src") as string);
       loadCount.value = i + 1;
     }

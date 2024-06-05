@@ -150,7 +150,7 @@ export default defineMock([
             },
             {
               path: "upload",
-              component: "demo/upload",
+              component: "demo/upload/index",
               name: "Upload",
               meta: {
                 title: "大文件上传",
@@ -174,7 +174,7 @@ export default defineMock([
             },
             {
               path: "virtual-scroll",
-              component: "demo/virtual-scroll",
+              component: "demo/virtual-scroll/index",
               name: "VertualScrollDemo",
               meta: {
                 title: "虚拟滚动",
